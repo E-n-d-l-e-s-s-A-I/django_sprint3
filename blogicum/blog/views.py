@@ -1,5 +1,4 @@
 from typing import Any
-from django.shortcuts import render
 from django.http.response import Http404
 from django.views.generic import ListView, DetailView
 from .models import Post, Category
@@ -58,14 +57,6 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return Post.published_with_related.all()[:self.posts_count]
-
-
-def post_detail(request, post_id):
-    post = posts_by_ids.get(post_id)
-    if post:
-        return render(request, "blog/detail.html", {"post": post})
-    else:
-        raise Http404("no post with the entered id")
 
 
 class CategoryDetailView(DetailView):
